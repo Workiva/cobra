@@ -23,10 +23,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-func init() {
-	initCmd.Flags().StringArrayVar(&cmdFlags, "flag", []string{}, `the flags to auto generate.  For each flag do '--flag "flagName:type:description"'`)
-}
-
 var initCmd = &cobra.Command{
 	Use:     "init [name]",
 	Aliases: []string{"initialize", "initialise", "create"},
@@ -154,24 +150,6 @@ import (
 
 var cfgFile string{{end}}
 
-{{ printFlagVars .flags }}
-
-func init() { {{- if .viper}}
-	cobra.OnInitialize(initConfig)
-{{end}}
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.{{ if .viper }}
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.{{ .appName }}.yaml)"){{ else }}
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.{{ .appName }}.yaml)"){{ end }}
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	{{ printFlagCreates .flags true }}
-}
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "{{.appName}}",
@@ -195,7 +173,20 @@ func Execute() {
 		os.Exit(1)
 	}
 }
-{{ if .viper }}
+
+func init() { {{- if .viper}}
+	cobra.OnInitialize(initConfig)
+{{end}}
+	// Here you will define your flags and configuration settings.
+	// Cobra supports persistent flags, which, if defined here,
+	// will be global for your application.{{ if .viper }}
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.{{ .appName }}.yaml)"){{ else }}
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.{{ .appName }}.yaml)"){{ end }}
+
+	// Cobra also supports local flags, which will only run
+	// when this action is called directly.
+	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}{{ if .viper }}
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
@@ -229,16 +220,6 @@ func initConfig() {
 	data["viper"] = viper.GetBool("useViper")
 	data["license"] = project.License().Header
 	data["appName"] = path.Base(project.Name())
-
-	flags := []flagDefinition{}
-	for _, value := range cmdFlags {
-		f, err := buildFlag(value, "rootCmd")
-		if err != nil {
-			er(err)
-		}
-		flags = append(flags, f)
-	}
-	data["flags"] = flags
 
 	rootCmdScript, err := executeTemplate(template, data)
 	if err != nil {
