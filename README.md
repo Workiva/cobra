@@ -125,7 +125,7 @@ Using Cobra is easy. First, use `go get` to install the latest version
 of the library. This command will install the `cobra` generator executable
 along with the library and its dependencies:
 
-    go get -u github.com/Workvia/cobra/cobra
+    go get -u github.com/Workiva/cobra/cobra
 
 Next, include Cobra in your application:
 
