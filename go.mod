@@ -13,6 +13,6 @@ require (
 	github.com/spf13/afero v1.2.1 // indirect
 	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.3.1
-	golang.org/x/sys v0.0.0-20190222171317-cd391775e71e // indirect
+	golang.org/x/sys v0.0.0-20220808155132-1c4a2a72c664 // indirect
 	gopkg.in/yaml.v2 v2.2.2
 )
