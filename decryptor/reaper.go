@@ -138,14 +138,18 @@ func addJWTHeader(req *retryablehttp.Request, signingKey []byte) error {
 	return err
 }
 
-// random string of 32 bytes to be signed into a JWT - value is not used
-func generateNonce() tokenClaims {
-	b := make([]rune, 32)
+func randomString(n int) string {
+	b := make([]rune, n)
 	for i := range b {
 		b[i] = letterRunes[rand.Intn(len(letterRunes))]
 	}
+	return string(b)
+}
 
-	return tokenClaims{Nonce: string(b)}
+// random string of 32 bytes to be signed into a JWT - value is not used
+func generateNonce() tokenClaims {
+	b := randomString(32)
+	return tokenClaims{Nonce: b}
 }
 
 // Using a HTTP client that will automatically retry 5xx errors to ensure that our connection
