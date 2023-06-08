@@ -14,7 +14,9 @@ jobs:
           with:
             go-version-file: 'go.mod'
             cache-dependency-path: 'go.sum'
-        - name: Unit test \#1 (Installation)
-          run: |
-            go version
-            go test ./...
+        - name: "Display Go Version"
+          run: go version
+        - name: "Run Go Build"
+          run: go build -v ./...
+        - name: "Run Go Test"
+          run: go test -v ./...
