@@ -27,5 +27,5 @@ jobs:
             rm -rf test-reports
             mkdir test-reports
             go clean -testcache
-            which go-junit-report
+            /usr/bin/which go-junit-report
             go test -v 2>&1 `go list ./... | grep -v /vendor/` | $GOPATH/bin/go-junit-report -iocopy -set-exit-code -out test-reports/unit-test-report.xml
