@@ -7,10 +7,9 @@ permissions:
 
 jobs:
   Wayne-Test-GHA1:
-    runs-on: xs
-    container:
-      image: amazonlinux-latest
+    runs-on: [ self-hosted, small ]
+    container: golang:1.20
     steps:
-      - name: Install dependencies
-        run: |
-          apt-get update && apt-get upgrade -y
+        - uses: actions/checkout@v3
+        - name: Unit tests
+          run: go test
