@@ -1,0 +1,16 @@
+name: CI process for Workiva/Cobra
+on: [push, pull_request]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  Wayne-Test-GHA1:
+    runs-on: xs
+    container:
+      image: amazonlinux-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get upgrade -y
