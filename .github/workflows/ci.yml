@@ -14,7 +14,7 @@ jobs:
         #- uses: workiva/gha-store-artifacts@refs/tags/v1.0.20
         - uses: actions/setup-go@v4
           with:
-            go-version: '^1.18'
+            go-version: '1.18'
             #go-version-file: 'go.mod'
             #cache-dependency-path: 'go.sum'
         - name: "Display Go Version"
