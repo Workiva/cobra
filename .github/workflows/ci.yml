@@ -22,4 +22,4 @@ jobs:
         - name: "Run Go Test"
           run: |
             export GOPATH=$(go env GOPATH)
-            go test ./...
+            make test
