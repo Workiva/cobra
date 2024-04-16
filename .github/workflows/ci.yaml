@@ -22,7 +22,7 @@ jobs:
           go-version: 1.18
       - name: Run tests
         run: make test
-      - name: Upload test results
-        uses: Workiva/gha-upload-test-reports@v2.0.3
-        with:
-          test-reports: "test-reports/unit-test-report.xml"
+#      - name: Upload test results
+#        uses: Workiva/gha-upload-test-reports@v2.0.3
+#        with:
+#          test-reports: "test-reports/unit-test-report.xml"
