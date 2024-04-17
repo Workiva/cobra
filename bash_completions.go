@@ -160,7 +160,7 @@ __%[1]s_handle_filename_extension_flag()
 __%[1]s_handle_subdirs_in_dir_flag()
 {
     local dir="$1"
-    pushd "${dir}" >/dev/null 2>&1 && _filedir -d && popd >/dev/null 2>&1
+    pushd "${dir}" >/dev/null 2>&1 && _filedir -d && popd >/dev/null 2>&1 || return
 }
 
 __%[1]s_handle_flag()
