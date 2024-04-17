@@ -59,6 +59,7 @@ __%[1]s_contains_word()
 }
 
 __%[1]s_handle_reply()
+# shellcheck disable=SC2207
 {
     __%[1]s_debug "${FUNCNAME[0]}"
     case $cur in
